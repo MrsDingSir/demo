@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<table>
+		<thead>
+			<tr>
+				<td>编号</td>
+				<td>标题</td>
+				<td>价格</td>
+				<td>日期</td>
+			</tr>
+		</thead>
+		<tbody th:remove="all-but-first">
+			<tr th:each="book,index : ${books}">
+				<td th:text="${book.bookId}"></td>
+				<td th:text="${book.title}"></td>
+				<td th:text="${book.price}"></td>
+				<td th:text="${#dates.format(book.date, 'yyyy-MM-dd HH')}">2000-09-09</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>jsp从入门到放弃</td>
+				<td>100</td>
+			</tr>
+		</tbody>
+
+
+</table>
+</body>
+</html>
