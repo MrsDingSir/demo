@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.spring.mapper.UserMapper">
+	<insert id="insert" parameterType="User"
+	 useGeneratedKeys="true" keyProperty="userId">
+	 INSERT INTO `qq`.`users` (
+  `userName`,
+  `password`,
+  `nickName`,
+  `createTime`,
+  `headImg`
+) 
+VALUES
+  (
+    #{userName},
+     #{password},
+     #{nickName},
+     ${createTime},
+     #{headImg}
+  ) ;
+	
+	</insert>
+	
+	<select id="select" resultType="User">
+ 		SELECT 
+		  `userId`,
+		  `userName`,
+		  `password`,
+		  `nickName`,
+		  `createTime`,
+		  `headImg` 
+		 FROM
+		  `qq`.`users` 
+		WHERE
+		 	userName=#{userName} and password=#{password}			  
+	</select>
+	
+	<select id="selectById" resultType="User">
+			SELECT 
+			  `userId`,
+			  `userName`,
+			  `nickName`,
+			  `createTime`,
+			  `headImg` 
+			FROM
+			  `qq`.`users` 
+			WHERE 
+				`nickName` LIKE '%${nickName}' AND `userId` != #{userId}
+	</select>
+	
+	<select id="selectId" resultType="User" parameterType="int">
+			SELECT 
+			  `userId`,
+			  `userName`,
+			  `nickName`,
+			  `createTime`,
+			  `headImg` 
+			FROM
+			  `qq`.`users` 
+			WHERE 
+				`userId`= #{userId}
+	</select>
+  <select id="findFriend" resultType="User">
+	SELECT
+		users.`userId`,
+		users.`headImg`,
+		friend.`friendName` AS "friend.friendName",
+		`space`.`spaceId` AS "space.spaceId"
+		FROM
+		`users`,`friend`,`space`
+		WHERE
+		users.`userId`=friend.`frienduserId`
+		AND friend.`frienduserId`=`space`.`userId`
+		AND friend.`userId`=#{userId} AND `space`.`spaceId`=#{spaceId}
+	</select>
+</mapper>

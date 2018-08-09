@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.spring.mapper.GroupingMapper">
+ 	<select id="selectById" resultType="Grouping">
+	 	SELECT 
+		  `groupingId`,
+		  `groupingName`,
+		  `userId` 
+		FROM
+		  `qq`.`grouping` 
+	 	WHERE
+	 	 `userId` = #{userId};
+ 	</select>
+ 	
+ 	<insert id="insert" parameterType="Grouping" useGeneratedKeys="true" keyProperty="groupingId">
+ 			INSERT INTO `qq`.`grouping` (
+			  `groupingName`,
+			  `userId`
+			) 
+			VALUES
+			  (			  
+			    #{groupingName},
+			   	#{userId}
+			  ) ;
+ 	
+ 	
+ 	</insert>
+ 	
+ 	<delete id="delete">
+ 			DELETE 
+				FROM
+				  `qq`.`grouping` 
+				WHERE
+				  `userId` = #{userId} AND `groupingId` = #{groupingId} ;
+ 	</delete>
+ 	
+ 	<update id="update" parameterType="Grouping">
+ 			UPDATE 
+			  `qq`.`grouping` 
+			SET
+			  `groupingName` = #{groupingName}
+			WHERE `groupingId` =#{groupingId} ;
+ 	
+ 	</update>
+ 	
+ 	<select id="selectMinId" resultType="Grouping">
+ 			 SELECT
+ 			 MIN(`groupingId`) AS groupingId  
+ 			 FROM
+ 			 `grouping` WHERE `userId`=#{userId} 	
+ 	</select>
+</mapper>

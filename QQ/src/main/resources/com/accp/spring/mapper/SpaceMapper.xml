@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.spring.mapper.SpaceMapper">
+ 
+ <insert id="insertSpace">
+ INSERT INTO `qq`.`space` (
+  `backColor`,
+  `backImgId`,
+  `userId`
+) 
+VALUES
+  (
+    #{backColor},
+    #{backImgId},
+    #{userId}
+  ) ;
+ </insert>
+ 
+ <select id="selectWhoSpace" resultType="Space">
+ SELECT * FROM `space` WHERE `userId`=#{userId}
+ </select>
+ 
+</mapper>

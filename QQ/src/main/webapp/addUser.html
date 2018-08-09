@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>注册</title>
+		<base href="/QQ/"/>
+		<style type="text/css" >
+			html 
+			{
+			    background: url(img/09592I944-4.jpg) no-repeat center center fixed;
+			    -webkit-background-size: cover;
+			    -moz-background-size: cover;
+			    -o-background-size: cover;
+			    background-size: cover;
+			}
+			#yzmp>span{
+				display: inline-block;
+				vertical-align: middle;
+			}
+		</style>
+	</head>
+	<body>
+		<p style="font-size: 3rem;color: white;padding-left: 4rem;">QQ</p>
+		<form action="User/insertUser" method="post">		
+		<p style="text-align: center;margin-top: 16rem;">
+			<input type="text" name="nickName" placeholder="昵称" style="font-weight: bold;margin:2rem 0px 0.1rem 0rem;height: 3rem;width: 23rem;font-size:2rem;border:0px;background:none;outline:none;color: white;">
+			<hr style="width: 23rem;background-color: white;border: 1px solid white;" />
+		</p>
+		<p style="text-align: center;">
+			<input type="password" name="password" placeholder="密码"  style="font-weight: bold;margin:2rem 0px 0.1rem 0rem;height: 3rem;width: 23rem;font-size:2rem;border:0px;background:none;outline:none;color: white;">
+			<hr style="width: 23rem;background-color: white;border: 1px solid white;" />
+		</p>
+		<p id="yzmp" style="text-align: center;" >
+							<span>
+							<input type="text" name="validateCode" id="code" style="width:13rem;height:3rem;font-size: 2rem;opacity: 0.7"/>
+							 </span> 
+					<!-- 验证码图片 -->
+						<span>
+                        <img src="verify/code" id="verify" style="width:9rem;line-height: 2rem"/>                                         
+                        </span>
+		</p>
+		<p style="text-align: center;margin-top: 2rem;">
+			<input value="注&nbsp;册" type="submit" style="outline:none;border-radius: 5px;color: white;border: none;font-size: 2rem;background-color: #46b8da;width: 23rem;height: 4.3rem;"/>
+			
+		</p>
+		
+		<p style="margin-top: 2rem;margin-left:7rem;width: 23rem;">
+			<span style="text-align: left;color:white;font-size: 1.5rem;" onclick="dl()">登录</span>
+		</p>
+		</form>
+	</body>
+	<script src="js/jquery-1.12.4.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/remstyle.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			
+		})
+		function dl() {
+			window.location.href="User/login";
+			
+		}
+		
+		$("form").submit(function(e){
+             if($("#account").val()==""){
+                 alert("账号不能为空");
+                 e.preventDefault();
+             }else if($("#passWord").val()==""){
+                 alert("密码不能为空");
+                 e.preventDefault();
+             }else if($("input[name=validateCode]").val()==""){
+                 alert("验证码不能为空");
+                 e.preventDefault();
+             }else{
+                 <!-- 获取输入的验证码 -->
+                 var verifyCode=$("input[name=validateCode]").val();
+                 <!-- 通过ajax方式将值传到后台 -->
+                 $.ajax({
+                     url:"verify/checkVerifyCode",<!-- 要传的地址 -->
+                     type:"post",                        <!-- 传值的方式 -->
+                     data:{"verifyCode":verifyCode},     <!-- 传的数据(json对象) -->
+                     async:false,                        <!-- 是否异步 -->
+                     success:function(result){           <!-- 成功后执行的代码 -->
+                         if(result=="false"){
+                             alert("验证码错误");
+                             e.preventDefault();
+                         }else{
+                             $("#form1").submit();
+                         }
+
+                     }
+                 });
+             }
+         });
+         <!-- 刷新图片 -->
+         $("#verify").unbind("click").bind("click",function(){
+             <!-- 传递一个随机数给后台 -->
+             $("#verify").attr("src","verify/code?"+Math.random());
+         });
+			
+	</script>
+</html>

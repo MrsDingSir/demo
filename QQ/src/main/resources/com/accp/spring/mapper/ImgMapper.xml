@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.spring.mapper.ImgMapper">
+ 
+ <insert id="shuoImg">
+ INSERT INTO `qq`.`img` (
+  `path`,
+  `imgType`,
+  `masterId`
+) 
+VALUES
+  (
+    #{path},
+    #{imgType},
+   	#{masterId}
+  ) ;
+
+ 
+ </insert>
+ 
+ <select id="dynamicstateImg" resultType="Img">
+ SELECT * FROM `img` WHERE `imgType`=1 AND `masterId`=#{masterId}
+ </select>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.spring.mapper.DynamicstateMapper">
+	<insert id="insertShuo" parameterType="Dynamicstate"
+		useGeneratedKeys="true" keyProperty="stateId" keyColumn="stateId">
+		INSERT INTO `qq`.`dynamicstate` (
+		`spaceId`,
+		`stateText`,
+		`stateTime`
+
+		)
+		VALUES
+		(
+		#{spaceId},
+		#{stateText},
+		${stateTime}
+		) ;
+
+	</insert>
+	<select id="AllDynamicsate" resultType="Dynamicstate">
+		SELECT
+		*
+		FROM
+		`dynamicstate` WHERE `spaceId` IN 
+		(SELECT `spaceId` FROM `space` WHERE `userId` IN
+		(SELECT `frienduserId` FROM `friend` WHERE `userId`=#{userId}) or userId=#{myUserId})
+	</select>
+</mapper>

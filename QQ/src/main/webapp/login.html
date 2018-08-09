@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+	</head>
+		<base href="/QQ/"/>
+	<style type="text/css" >
+			body 
+			{
+			    background: url(img/09592I944-4.jpg) no-repeat center center fixed;
+			    -webkit-background-size: cover;
+			    -moz-background-size: cover;
+			    -o-background-size: cover;
+			    background-size: cover;
+			}
+		</style>
+	<body>
+		<p style="font-size: 3rem;color: white;padding-left: 4rem;">QQ</p>
+		<form action="User/doLogin" method="post">
+		<p style="text-align: center;margin-top: 16rem;">
+			<input name="userName" type="text" placeholder="账号" style="font-weight: bold;margin:2rem 0px 0.1rem 0rem;height: 3rem;width: 23rem;font-size:2rem;border:0px;background:none;outline:none;color: white;">
+			<hr style="width: 23rem;background-color: white;border: 1px solid white;" />
+		</p>
+		<p style="text-align: center;">
+			<input name="password" type="password" placeholder="密码" style="font-weight: bold;margin:2rem 0px 0.1rem 2rem;height: 3rem;width: 23rem;font-size:2rem;border:0px;background:none;outline:none;color: white;">
+			<span id="showpwd" style="font-size: 2rem;color: white;">☭</span>
+			<hr style="width: 23rem;background-color: white;border: 1px solid white;" />
+		</p>
+		<p style="text-align: center;margin-top: 2rem;">
+			<input value="登&nbsp;录" type="submit" style="outline:none;border-radius: 5px;color: white;border: none;font-size: 2rem;background-color: #46b8da;width: 23rem;height: 4.3rem;"/>
+			
+		</p>
+		
+		<p style="margin-top: 2rem;margin-left:7rem;width: 23rem;">
+			<span style="text-align: left;color:white;font-size: 1.5rem;">忘记密码</span>
+			<span style="margin-left: 10rem;color:white;font-size: 1.5rem" onclick="zc()">立即注册</span>
+		</p>
+		</form>
+	</body>
+	<script src="js/jquery-1.12.4.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/remstyle.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#showpwd").click(function(){
+				var a=$(this).prev().attr("type");
+				if(a=="password"){
+					$(this).prev().attr("type","text")
+				}
+				if(a=="text"){
+					$(this).prev().attr("type","password")
+				}
+			})
+		})
+		function zc() {
+			window.location.href="User/zc";
+			
+		}
+		
+	</script>
+</html>
