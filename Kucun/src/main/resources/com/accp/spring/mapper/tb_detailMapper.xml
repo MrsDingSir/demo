@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.spring.mapper.tb_detailMapper">
+<insert id="insert" parameterType="tb_detail" useGeneratedKeys="true">
+		INSERT INTO `ruku`.`tb_detail`
+		 (
+		  `billno`,
+		  `lineid`,
+		  `goodsname`,
+		  `goodsnum`,
+		  `goodsprice`,
+		  `goodsmoneyamt`,
+		  `ispresent`
+		) 
+		VALUES
+		  (
+		    #{billno},
+		    #{lineid},
+		    #{goodsname},
+		    #{goodsnum},
+		    #{goodsprice},
+		    #{goodsmoneyamt},
+		    #{ispresent}
+		  ) ;
+
+</insert>
+
+</mapper>

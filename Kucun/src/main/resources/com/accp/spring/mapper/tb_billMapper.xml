@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.spring.mapper.tb_billMapper">
+ 		<insert id="insert" parameterType="tb_bill" 
+ 		useGeneratedKeys="true" keyProperty="billno">
+	 		INSERT INTO `ruku`.`tb_bill` 
+	 		(
+			  `billno`,
+			  `billdate`,
+			  `suppliername`,
+			  `supplieraddress`,
+			  `department`,
+			  `warehouse`,
+			  `buyer`,
+			  `executor`
+			) 
+			VALUES
+			  (
+			    #{billno},
+			    #{billdate},
+			    #{suppliername},
+			    #{supplieraddress},
+			    #{department},
+			    #{warehouse},
+			    #{buyer},
+			    #{executor}
+			  ) ;
+			 		
+ 		
+ 		</insert>
+ 		
+ 		<resultMap type="tb_bill" id="detail">
+ 			<id property="billno" column="billno"></id>
+ 			<result property="billdate" column="billdate"/>
+ 			<result property="suppliername" column="suppliername"/>
+ 			<result property="supplieraddress" column="supplieraddress"/>
+ 			<result property="department" column="department"/>
+ 			<result property="warehouse" column="warehouse"/>
+ 			<result property="buyer" column="buyer"/>
+ 			<result property="executor" column="executor"/>
+ 			<association property="detail" javaType="tb_detail">
+ 			<id property="billno" column="billno"></id>
+ 			<id property="lineid" column="lineid"></id>
+ 			<result property="goodsname" column="goodsname"/>
+ 			<result property="goodsnum" column="goodsnum"/>
+ 			<result property="goodsprice" column="goodsprice"/>
+ 			<result property="goodsmoneyamt" column="goodsmoneyamt"/>
+ 			<result property="ispresent" column="ispresent"/>
+ 			</association>
+ 		</resultMap>
+ 		<select id="selectAll" resultMap="detail">
+ 			SELECT b.`billno`,b.`billdate`,b.`suppliername`,b.`supplieraddress`,b.`department`,b.`warehouse`,b.`buyer`,b.`executor`,d.`billno`,d.`goodsmoneyamt`,d.`goodsname`,d.`goodsnum`,d.`goodsprice`,d.`ispresent`,d.`lineid`
+ 			FROM  `tb_bill` AS b,`tb_detail` AS d ORDER BY b.`billno` DESC LIMIT 0,1	
+ 		</select>
+</mapper>
